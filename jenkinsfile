@@ -1,29 +1,22 @@
 pipeline {
-          
-          agent {
-
-                  label {
-                           label "built-in"
-                           customWorkspace "/mnt/pipe"
-
-                        
-                        }
-              
-
-
-                }  
-
-            stages {
-
-                      stage ("one") {
-
-                                       steps {
-                                                  echo "hello"
-                                              }
-  
-                                     }
-  
-
-                   }
-        
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building...'
+                // Add your build commands, e.g. "sh 'npm install'" or "sh './gradlew build'"
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+                // Add test commands, e.g. "sh 'npm test'" or "sh './gradlew test'"
+            }
+        }
+    }
+    post {
+        success { echo '✅ Pipeline passed!' }
+        failure { echo '❌ Pipeline failed.' }
+    }
 }
+
